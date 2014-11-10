@@ -15,21 +15,23 @@ public:
     //TNode node=new TNode();
     vector<TNode*> tree;
     vector<double> c;
-    vector<vector<double>> a;
+    double a[256][256];
     vector<double> b;
     int size=1;
     int Z=0;
-    int i;
+    int i=0;
+    int ar=0;
+    int ac=0;
     vector<int> result;
     int j=0;
-    binaryTree(vector<double> c,vector<vector<double>> a,vector<double> b,int size,int numE);
+    binaryTree(vector<double> c,double a[256][256],vector<double> b,int size,int numE,int ar,int ac);
     void searchL(int pi,int i);
     void searchR(int pi, int i);
     void calculateB(TNode* node);
     void calculateE(TNode* node);
     void calculateB(TNode* node,double pb);
     void calculateE(TNode* node,vector<double> pe);
-    void changeX(int pi,int i,int LR);
+    int changeX(int pi,int i,int LR);
     void start();
 };
 

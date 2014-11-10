@@ -15,7 +15,7 @@ using namespace std;
 
 class TNode {
 public:
-    vector<double> x;
+    vector<int> x;
     int b=-1;
     vector<double> e;
     int changeI = 0;
