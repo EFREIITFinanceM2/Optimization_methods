@@ -86,7 +86,7 @@ void binaryTree::calculateB(TNode *node){
     node->b=0;
     for (int i=0; i<c.size()-1; i++) {
         if (c[i]<0) {
-            node->b=node->b-c[i];
+            node->b=node->b;
         }
         else{
             node->b=node->b+c[i];
@@ -118,10 +118,15 @@ void binaryTree::calculateE(TNode *node){
 void binaryTree::calculateE(TNode *node, vector<double> pe){
     for (int n=0; n<node->e.size(); n++) {
         if (node->x[node->changeI]==1){
-            node->e[n]=pe[n]-a[n][node->changeI];
+            if (a[n][node->changeI]>0) {
+                node->e[n]=pe[n]-a[n][node->changeI];
+            }
         }
         else{
-            node->e[n]=pe[n]+a[n][node->changeI];
+            if (a[n][node->changeI]<0) {
+                node->e[n]=pe[n]+a[n][node->changeI];
+
+            }
         }
     }
 }
