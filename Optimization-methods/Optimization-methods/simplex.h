@@ -11,6 +11,9 @@
 
 #include <stdio.h>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 
 class simplex
@@ -24,12 +27,19 @@ public:
     int rmax,colmax=0;
     int pivotx,pivoty;
     int xnum,snum,anum=0;
-    int Z=0;
-    simplex(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax);
+    double Z=0;
+    
+    string result = "simplexResult.txt";
+    
+    simplex(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result);
     void Cpivoty();
     void Dantzig();
     bool isEnd();
     void start();
+    bool isTwoPhase()
+    {
+        return false;
+    }
     
 };
 

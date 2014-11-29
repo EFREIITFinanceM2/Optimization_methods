@@ -8,16 +8,22 @@
 
 #include "twoPhase.h"
 
+
+twoPhase::twoPhase(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result):simplex(c,a,b,xnum,snum,anum,ai,rmax,colmax,result)
+{
+//result="twoPhaseResult";
+}
+
 void twoPhase::calulateP()
 {
-    double min[this->ai.size()];
-    int pos[this->ai.size()];
+    double* min=new double[this->ai.size()];
+    int* pos = new int[this->ai.size()];
     
     for (int i=0; i<this->ai.size(); i++) {
         min[i]=10000;
     }
     
-    for (int j=0; j<this->colmax; j++) {
+    for (int j=0; j<this->ai.size(); j++) {
         pos[j]=0;
     }
     
@@ -37,10 +43,11 @@ void twoPhase::calulateP()
         int temp =1000;
         if (min[i]<temp) {
             temp = min[i];
-            this->pivotx=i;
+            this->pivotx=ai[i];
             this->pivoty=pos[i];
         }
     }
+    base[this->pivotx]=this->pivoty;
 }
 
 bool twoPhase::isEndU(){

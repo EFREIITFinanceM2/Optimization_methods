@@ -10,5 +10,19 @@
 #define __Optimization_methods__changeForm__
 
 #include <stdio.h>
+#include <vector>
+#include "readSimplex.h"
+//using namespace std;
+
+class changeForm{
+    //int colmax=0;
+    //int rmax=0;
+    //vector <double> c;
+    //double a[256][256];
+    //vector <double> d;
+public:
+    static readSimplex* change(readSimplex* read);
+
+};
 
 #endif /* defined(__Optimization_methods__changeForm__) */

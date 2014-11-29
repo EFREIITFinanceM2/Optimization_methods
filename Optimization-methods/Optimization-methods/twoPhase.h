@@ -14,10 +14,17 @@
 
 class twoPhase:public simplex
 {
+public:
     twoPhase();
+    twoPhase(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result);
     void calulateP();
     bool isEndU();
     void calulateU();
+    bool isTwoPhase()
+    {
+        return true;
+    }
+
     
 };
 

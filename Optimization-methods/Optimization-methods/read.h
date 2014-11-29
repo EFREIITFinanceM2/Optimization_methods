@@ -14,6 +14,9 @@
 #include <fstream>
 #include <vector>
 #include <stdio.h>
+#include <string>
+
+#define adress "test1.txt"
 
 using namespace std;
 
@@ -21,24 +24,27 @@ class view
 {
 public:
     vector <double> c;
-    double a[256][256];
+    double a[256][256]={0};
     vector <double> d;
     int tempar=0;
     int ta=0;
+    string myAdress;
+    
 
     
     char temp[10];
     int trk = 0;
     int tracker_num = 0;
-    view(){
-        
+    view(string myAdress){
+        this->myAdress=myAdress;
         char buffer[256];
         fstream readfile;
-        readfile.open("test.txt", ios::in);
+        readfile.open(this->myAdress, ios::in);
         while(!readfile.eof())
         {
             readfile.getline(buffer,256,'\n');
             tempar++;
+            //cout<<tempar<<" "<<buffer<<" "<<readfile.eof()<<endl;
         }
         tempar=tempar-2;
         //vector<vector<double> >teemp(temp-2,vector<double>(256));
@@ -70,7 +76,7 @@ public:
     {
         char buffer[256];
         fstream readfile;
-        readfile.open("test.txt", ios::in);
+        readfile.open(this->myAdress, ios::in);
         
         while(!readfile.eof())
         {
