@@ -9,8 +9,9 @@
 #include "twoPhase.h"
 
 
-twoPhase::twoPhase(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result):simplex(c,a,b,xnum,snum,anum,ai,rmax,colmax,result)
+twoPhase::twoPhase(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result,readSimplex *read ):simplex(c,a,b,xnum,snum,anum,ai,rmax,colmax,result)
 {
+    this->read=read;
 //result="twoPhaseResult";
 }
 
@@ -60,9 +61,14 @@ bool twoPhase::isEndU(){
 }
 
 void twoPhase::calulateU(){
-    while (!isEndU()) {
+    int temp=0;
+    while (!isEndU()&&(temp<1000)) {
         calulateP();
         Dantzig();
+        temp++;
+    }
+    if (temp>=1000) {
+        hasResult=false;
     }
     colmax-=anum;
 }

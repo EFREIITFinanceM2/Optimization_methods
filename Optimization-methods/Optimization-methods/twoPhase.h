@@ -11,12 +11,14 @@
 
 #include <stdio.h>
 #include "simplex.h"
+#include "readSimplex.h"
 
 class twoPhase:public simplex
 {
 public:
+    readSimplex *read=NULL;
     twoPhase();
-    twoPhase(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result);
+    twoPhase(vector<double> c,double a[][256],vector<double> b,int xnum,int snum, int anum,vector<int> ai, int rmax,int colmax,string result,readSimplex *read);
     void calulateP();
     bool isEndU();
     void calulateU();

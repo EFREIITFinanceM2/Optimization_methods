@@ -8,7 +8,8 @@
 
 #include "changeForm.h"
 
-readSimplex* changeForm::change(readSimplex* read){
+readSimplex* changeForm::change(readSimplex* readb){
+    readSimplex* read=new readSimplex(readb);
     double temp;
     vector<int> ai;
     temp=read->c.back();

@@ -24,10 +24,12 @@ public:
     vector<double> b;
     vector<int> base;
     vector<int> ai;
+    vector<double> *xResult;
     int rmax,colmax=0;
     int pivotx,pivoty;
     int xnum,snum,anum=0;
     double Z=0;
+    bool hasResult=true;
     
     string result = "simplexResult.txt";
     

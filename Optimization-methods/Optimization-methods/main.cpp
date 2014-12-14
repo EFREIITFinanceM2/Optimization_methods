@@ -12,6 +12,7 @@
 #include "readSimplex.h"
 #include "changeForm.h"
 #include "twoPhase.h"
+#include "split.h"
 
 
 
@@ -19,12 +20,14 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     //std::cout << "Hello, World!\n";
 
+    /*
     
     //Two Phase.
-    readSimplex* vTwoPh=new readSimplex("twoPhase.txt");
-    vTwoPh->read();
-    vTwoPh=changeForm::change(vTwoPh);
-    twoPhase *twoPh = new twoPhase(vTwoPh->c,vTwoPh->a,vTwoPh->d,vTwoPh->xnum,vTwoPh->snum,vTwoPh->anum,vTwoPh->ai,vTwoPh->rmax,vTwoPh->colmax,"twoPhaseResult.txt");
+    readSimplex* vTwoPhb=new readSimplex("twoPhase.txt");
+    vTwoPhb->read();
+    //readSimplex* vTwoPh=new readSimplex(vTwoPhb);
+    readSimplex* vTwoPh=changeForm::change(vTwoPhb);
+    twoPhase *twoPh = new twoPhase(vTwoPh->c,vTwoPh->a,vTwoPh->d,vTwoPh->xnum,vTwoPh->snum,vTwoPh->anum,vTwoPh->ai,vTwoPh->rmax,vTwoPh->colmax,"twoPhaseResult.txt",vTwoPhb);
     twoPh->calulateU();
     twoPh->start();
     
@@ -39,8 +42,12 @@ int main(int argc, const char * argv[]) {
     Sim->start();
     
 
+     */
     
-    
+    readSimplex* vTwoPhb=new readSimplex("split.txt");
+    vTwoPhb->read();
+    split *s=new split(vTwoPhb);
+    s->start();
     
     /*
     binaryTree* T = new binaryTree(v->c,v->a,v->d,v->c.size(),v->tracker_num,v->tempar, (v->ta)+1);

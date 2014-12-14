@@ -23,6 +23,7 @@ simplex::simplex(vector<double> c,double a[][256],vector<double> b,int xnum,int 
     this->snum = snum;
     this->anum = anum;
     this->ai=ai;
+    this->xResult =new vector<double>(xnum);
     for (int i=0; i<rmax;i++ ) {
         base.push_back(i+xnum);
     }
@@ -33,11 +34,17 @@ simplex::simplex(vector<double> c,double a[][256],vector<double> b,int xnum,int 
     ofstream SaveFile(result);
     SaveFile.clear();
     for (int i=0; i<rmax; i++) {
+        SaveFile<<base[i]<<" ";
         for (int j=0; j<colmax; j++) {
             SaveFile<<a[i][j]<<" ";
         }
         SaveFile<<endl;
         //cout<<v->c[i]<<endl;
+    }
+    SaveFile<<"snum: "<<snum<<endl;
+    SaveFile<<"c[]=\n";
+    for (int i=0; i<c.size(); i++) {
+        SaveFile<<c[i]<<" ";
     }
     SaveFile<<endl;
 
@@ -101,6 +108,7 @@ void simplex::Dantzig()
         tampc[j]=c[j]-(c[this->pivoty]/a[this->pivotx][this->pivoty])*a[this->pivotx][j];
     }
     Z=Z-b[this->pivotx]*(c[this->pivoty]/a[this->pivotx][this->pivoty]);
+    b[this->pivotx]=b[this->pivotx]/a[this->pivotx][this->pivoty];
     
     for (int k=0; k<c.size(); k++) {
         c[k]=tampc[k];
@@ -118,12 +126,15 @@ void simplex::Dantzig()
     SaveFile<<"pivoty"<<":"<<pivoty<<endl;
     
     for (int i=0; i<rmax; i++) {
+        SaveFile<<"x"<<base[i]<<": ";
         for (int j=0; j<colmax; j++) {
             SaveFile<<a[i][j]<<" ";
         }
+        SaveFile<<b[i];
         SaveFile<<endl;
         //cout<<v->c[i]<<endl;
     }
+    SaveFile<<"Z: "<<-Z+c[c.size()];
     SaveFile<<endl;
     SaveFile.close();
 }
@@ -147,14 +158,33 @@ bool simplex::isEnd()
 
 void simplex::start()
 {
-    while (!isEnd()) {
-        Cpivoty();
-        Dantzig();
+    int temp=0;
+    if (hasResult) {
+        while (!isEnd()&&(temp<1000)) {
+            Cpivoty();
+            Dantzig();
+            temp++;
+        }
+        if (temp>=1000) {
+            hasResult=false;
+        }
     }
     
     ofstream SaveFile(result,ios::app);
-
+    
+    SaveFile<<"\n"<<"hasResult"<<hasResult<<endl;
+    
     SaveFile<<"\n"<<"max(Z)="<<-Z+c[c.size()]<<endl;
+    
+    for (int i=0; i<base.size(); i++) {
+        if (base[i]<xnum) {
+            xResult->at(base[i])=b[i];
+        }
+    }
+    for (int i=0; i<xResult->size(); i++) {
+        SaveFile<<"x"<<i<<": "<<xResult->at(i)<<endl;
+    }
+    
     SaveFile.close();
 
 
